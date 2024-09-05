@@ -12,9 +12,11 @@ import java.sql.Connection;
 public class Image_jdbc {
     public static void main(String[] args) throws SQLException
     {
-        String url="jdbc:postgresql://localhost:5432/ImageDb";
-        String user="postgres";
-        String password="Mota@11";
+        String url="jdbc:postgresql://localhost:5432/Database_Name"; // Enter the database name in this field--Database_Name
+        String user="";// Enter the user name
+        String password=""; // Enter the password
+        
+
 
     //1. To insert Image in Database
        // String img_path="E:\\OneDrive\\Desktop\\Image\\cute-picture.jpg"; // location of image to be taken from
@@ -23,11 +25,12 @@ public class Image_jdbc {
     //2, To retrive image from Database
         String folder_path="E:\\OneDrive\\Desktop\\Image\\"; //location where image has to be inserted
         String query="Select image_data from image_table where image_id=(?)"; // To retrive from table
+        Connection con=DriverManager.getConnection(url, user, password);
+        System.out.println("Connection established!");
 
         try
         {
-            Connection con=DriverManager.getConnection(url, user, password);
-            System.out.println("Connection established!");
+            
         //1. For insert    
            /*FileInputStream fs=new FileInputStream(img_path);
             byte[] image_data=new byte[fs.available()];
@@ -67,9 +70,11 @@ public class Image_jdbc {
       
             e.printStackTrace();
         }
+        finally{
+             con.close();
+        }
 
-
-        // con.close();
+        
 
     }
     
